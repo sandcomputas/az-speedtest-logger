@@ -11,6 +11,7 @@ public class LoggerConfiguration
     public readonly int LoggerId;
     public readonly string UserId;
 
+    public readonly Uri ApiUrl;
     public LoggerConfiguration()
     {
         var builder = new ConfigurationBuilder()
@@ -18,7 +19,7 @@ public class LoggerConfiguration
             .AddJsonFile("appsettings.json");
 
         var configuration = builder.Build();
-
+        ApiUrl = new Uri(configuration["speedTestApiUrl"]);
         var countryCode = configuration["loggerLocationCountryCode"];
         LoggerLocation = new RegionInfo(countryCode);
 
